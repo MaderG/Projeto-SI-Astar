@@ -109,11 +109,12 @@ def astar(inicio, fim):
 
         for estacao in estacaoadjacente:  #novos 'ramos' a serem visitados
             g_custo = distancia[atual] + g(atual, estacao)
-            if estacao not in distancia or g_custo < distancia[estacao]:
+            if estacao not in distancia or g_custo < distancia[estacao] + 4:
                 distancia[estacao] = g_custo
                 f_custo = g_custo + h(estacao, fim)
                 q.push(estacao, f_custo)
                 caminho[estacao] = atual
+
 
         Printscript(inicio, fim, caminho, distancia, expansao, q, 1)
     Printscript(inicio, fim, caminho, distancia, expansao, q, 2)
@@ -156,6 +157,7 @@ def Printscript(inicio, fim, caminho, distancia, expansao, q, nivel):
                     tempo += 4
                     temp = linhas[c1][c2]
         print(f'Tempo total da viagem {tempo:.2f} minutos')
+
 
 
 
