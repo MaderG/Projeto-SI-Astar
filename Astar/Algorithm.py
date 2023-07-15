@@ -107,9 +107,18 @@ def astar(inicio, fim):
 
         estacaoadjacente = estacoesadjacentes(atual, estacaoanterior)
 
-        for estacao in estacaoadjacente:  #novos 'ramos' a serem visitados
+        for i, estacao in enumerate(estacaoadjacente):  #novos 'ramos' a serem visitados
+            c1 = atual.split('E')
+            c1 = int(c1[1]) - 1
+            c2 = estacao.split('E')
+            c2 = int(c2[1]) - 1
+            if i == 0:
+                temp = linhas[c1][c2]
+            elif i <= len(estacaoadjacente) - 1:
+                if temp != linhas[c1][c2]:
+                    g_custo += 4
             g_custo = distancia[atual] + g(atual, estacao)
-            if estacao not in distancia or g_custo < distancia[estacao] + 4:
+            if estacao not in distancia or g_custo < distancia[estacao]:
                 distancia[estacao] = g_custo
                 f_custo = g_custo + h(estacao, fim)
                 q.push(estacao, f_custo)
